@@ -8,6 +8,9 @@ async function create(req, res, next) {
     const dataObj = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      roles: req.body.roles ? req.body.roles : [],
       status: req.body.status ? req.body.status : "active",
       isAdmin: req.body.isAdmin ? req.body.isAdmin : false,
     };
@@ -19,7 +22,7 @@ async function create(req, res, next) {
       message: "User Created Successfully",
     });
   } catch (error) {
-    console.log("User Creation Error", error);
+    next(error);
   }
 }
 
@@ -29,6 +32,7 @@ async function update(req, res, next) {
     const dataObj = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      email: req.body.email,
       password: req.body.password,
       roles: req.body.roles ? req.body.roles : [],
       status: req.body.status ? req.body.status : "active",

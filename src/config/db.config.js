@@ -1,4 +1,4 @@
-const { MONGO_CONNECTION_STRING } = require("./server.config.js");
+const { MONGO_CONNECTION_STRING } = require("./server.config");
 const mongoose = require("mongoose");
 
 async function connectToMongoDb() {

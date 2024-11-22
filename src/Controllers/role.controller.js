@@ -1,23 +1,23 @@
 const { RoleService } = require("../Services");
 const { StatusCodes } = require("http-status-codes");
 
-roleService = new RoleService();
+const roleService = new RoleService();
 
 async function create(req, res, next) {
   try {
     const dataObj = {
       roleName: req.body.roleName,
-      permissions: req.body.permission ? req.body.permission : [],
+      permissions: req.body.permission ? req.body.permissions : [],
     };
     const response = await roleService.create(dataObj);
-    return res.status(StatusCodes.CREATED).jons({
+    return res.status(StatusCodes.CREATED).json({
       success: true,
       data: response,
       err: {},
       message: "Role Created Successfully",
     });
   } catch (error) {
-    console.log("Role Creation Error");
+    next(error);
   }
 }
 
@@ -36,7 +36,7 @@ async function update(req, res, next) {
       message: "Role updated successfully",
     });
   } catch (error) {
-    console.log("Role updation Error");
+    next(error);
   }
 }
 
@@ -50,7 +50,7 @@ async function findById(req, res, next) {
       message: "Role fetched Successfully",
     });
   } catch (error) {
-    console.log("Role fetch Error");
+    next(error);
   }
 }
 
@@ -64,7 +64,7 @@ async function destroy(req, res, next) {
       message: "Role deleted Successfully",
     });
   } catch (error) {
-    console.log("Role deletion Error");
+    next(error);
   }
 }
 

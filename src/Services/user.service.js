@@ -1,3 +1,4 @@
+const { DuplicateError, NotExistError } = require("../Errors");
 const { UserRepository } = require("../Repositories");
 
 class UserService {
@@ -7,6 +8,9 @@ class UserService {
 
   async create(dataObj) {
     try {
+      const userExists = await this.userRepository.findByEmail(dataObj.email);
+      if (userExists) throw new DuplicateError("email", dataObj.email);
+
       const response = await this.userRepository.create(dataObj);
       return response;
     } catch (error) {
@@ -16,6 +20,9 @@ class UserService {
 
   async update(id, dataObj) {
     try {
+      const userExists = await this.userRepository.findById(id);
+      if (!userExists) throw new NotExistError("userId", id);
+
       const response = await this.userRepository.update(id, dataObj);
       return response;
     } catch (error) {
