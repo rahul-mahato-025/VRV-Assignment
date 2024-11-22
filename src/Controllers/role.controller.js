@@ -40,7 +40,7 @@ async function update(req, res, next) {
   }
 }
 
-async function find(req, res, next) {
+async function findById(req, res, next) {
   try {
     const response = await this.roleService.create(req.params.roleId);
     return res.status(StatusCodes.OK).json({
@@ -71,6 +71,6 @@ async function destroy(req, res, next) {
 module.exports = {
   create,
   update,
-  find,
+  findById,
   destroy,
 };
