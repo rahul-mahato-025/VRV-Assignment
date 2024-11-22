@@ -1,7 +1,7 @@
 const express = require("express");
 const userRouter = require("./user.route");
 const roleRouter = require("./role.route");
-const authRouter = require("./auth.routes");
+const authRouter = require("./auth.route");
 
 const v1Router = express.Router();
 v1Router.use("/users", userRouter);

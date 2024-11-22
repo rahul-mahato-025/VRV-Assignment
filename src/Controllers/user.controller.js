@@ -52,8 +52,6 @@ async function update(req, res, next) {
 
 async function findById(req, res, next) {
   try {
-    console.log(req.params);
-
     const response = await userService.findById(req.params.userId);
     return res.status(StatusCodes.OK).json({
       success: true,
