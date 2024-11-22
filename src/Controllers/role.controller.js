@@ -1,7 +1,7 @@
 const { RoleService } = require("../Services");
 const { StatusCodes } = require("http-status-codes");
 
-this.roleService = new RoleService();
+roleService = new RoleService();
 
 async function create(req, res, next) {
   try {
@@ -9,7 +9,7 @@ async function create(req, res, next) {
       roleName: req.body.roleName,
       permissions: req.body.permission ? req.body.permission : [],
     };
-    const response = await this.roleService.create(dataObj);
+    const response = await roleService.create(dataObj);
     return res.status(StatusCodes.CREATED).jons({
       success: true,
       data: response,
@@ -28,7 +28,7 @@ async function update(req, res, next) {
       roleName: req.body.roleName,
       permissions: req.body.permission ? req.body.permission : [],
     };
-    const response = await this.roleService.update(roleId, dataObj);
+    const response = await roleService.update(roleId, dataObj);
     return res.status(StatusCodes.OK).json({
       success: true,
       data: response,
@@ -42,7 +42,7 @@ async function update(req, res, next) {
 
 async function findById(req, res, next) {
   try {
-    const response = await this.roleService.create(req.params.roleId);
+    const response = await roleService.findById(req.params.roleId);
     return res.status(StatusCodes.OK).json({
       success: true,
       data: response,
@@ -56,7 +56,7 @@ async function findById(req, res, next) {
 
 async function destroy(req, res, next) {
   try {
-    await this.roleService.create(req.params.roleId);
+    await roleService.delete(req.params.roleId);
     return res.status(StatusCodes.OK).json({
       success: true,
       data: {},

@@ -1,38 +1,40 @@
 const { UserService } = require("../Services");
 const { StatusCodes } = require("http-status-codes");
 
-this.userService = new UserService();
+userService = new UserService();
 
 async function create(req, res, next) {
   try {
     const dataObj = {
-      firstname: req.body.firstName,
-      lastname: req.body.lastname,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       status: req.body.status ? req.body.status : "active",
       isAdmin: req.body.isAdmin ? req.body.isAdmin : false,
     };
-    const response = await this.userService.create(dataObj);
-    return res.status(StatusCodes.CREATED).jons({
+    const response = await userService.create(dataObj);
+    return res.status(StatusCodes.CREATED).json({
       success: true,
       data: response,
       err: {},
       message: "User Created Successfully",
     });
   } catch (error) {
-    console.log("User Creation Error");
+    console.log("User Creation Error", error);
   }
 }
 
 async function update(req, res, next) {
   try {
-    const userid = req.params.userid;
+    const userId = req.params.userId;
     const dataObj = {
-      firstname: req.body.firstName,
-      lastname: req.body.lastname,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      password: req.body.password,
+      roles: req.body.roles ? req.body.roles : [],
       status: req.body.status ? req.body.status : "active",
       isAdmin: req.body.isAdmin ? req.body.isAdmin : false,
     };
-    const response = await this.userService.update(userid, dataObj);
+    const response = await userService.update(userId, dataObj);
     return res.status(StatusCodes.OK).json({
       success: true,
       data: response,
@@ -46,7 +48,9 @@ async function update(req, res, next) {
 
 async function findById(req, res, next) {
   try {
-    const response = await this.userService.create(req.params.userid);
+    console.log(req.params);
+
+    const response = await userService.findById(req.params.userId);
     return res.status(StatusCodes.OK).json({
       success: true,
       data: response,
@@ -54,13 +58,13 @@ async function findById(req, res, next) {
       message: "User fetched Successfully",
     });
   } catch (error) {
-    console.log("User fetch Error");
+    console.log("User fetch Error", error);
   }
 }
 
 async function destroy(req, res, next) {
   try {
-    const response = await this.userService.create(req.params.userid);
+    await userService.delete(req.params.userId);
     return res.status(StatusCodes.OK).json({
       success: true,
       data: {},

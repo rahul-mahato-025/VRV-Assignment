@@ -5,9 +5,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  lastname: {
+  lastName: {
     type: String,
-    required: true,
   },
   status: {
     type: String,
@@ -17,6 +16,18 @@ const userSchema = new mongoose.Schema({
   isAdmin: {
     type: Boolean,
     default: false,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  roles: {
+    type: [
+      {
+        type: String,
+      },
+    ],
+    default: [],
   },
 });
 

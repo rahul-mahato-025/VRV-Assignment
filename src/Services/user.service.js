@@ -25,7 +25,7 @@ class UserService {
 
   async findById(id) {
     try {
-      const response = await this.userRepository.create(id);
+      const response = await this.userRepository.findById(id);
       return response;
     } catch (error) {
       throw error;
@@ -34,7 +34,7 @@ class UserService {
 
   async delete(id) {
     try {
-      const response = await this.userRepository.create(id);
+      const response = await this.userRepository.delete(id);
       return response;
     } catch (error) {
       throw error;

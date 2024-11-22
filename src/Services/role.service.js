@@ -25,7 +25,7 @@ class RoleService {
 
   async findById(id) {
     try {
-      const response = await this.roleRepository.create(id);
+      const response = await this.roleRepository.findById(id);
       return response;
     } catch (error) {
       throw error;
@@ -34,7 +34,7 @@ class RoleService {
 
   async delete(id) {
     try {
-      const response = await this.roleRepository.create(id);
+      const response = await this.roleRepository.delete(id);
       return response;
     } catch (error) {
       throw error;
