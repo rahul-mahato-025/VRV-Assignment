@@ -6,6 +6,7 @@ const { validateToken } = require("../../Middlewares/auth.middleware");
 const userRouter = express.Router();
 userRouter.post("/", validateCreateUser, userController.create);
 userRouter.patch("/:userId", userController.update);
+userRouter.get("/", userController.findAll);
 userRouter.get("/:userId", validateToken, userController.findById);
 userRouter.delete("/:userId", userController.destroy);
 

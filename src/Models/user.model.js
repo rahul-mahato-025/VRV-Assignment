@@ -26,14 +26,15 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    password: {
-      type: String,
-      required: true,
-    },
+    // password: {
+    //   type: String,
+    //   required: true,
+    // },
     roles: {
       type: [
         {
           type: mongoose.Schema.ObjectId,
+          ref: "Role",
         },
       ],
       default: [],
@@ -44,8 +45,8 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-userSchema.pre("save", function () {
-  this.password = bcrypt.hashSync(this.password, 12);
-});
+// userSchema.pre("save", function () {
+//   this.password = bcrypt.hashSync(this.password, 12);
+// });
 
 module.exports = mongoose.model("User", userSchema);

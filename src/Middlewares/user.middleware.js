@@ -1,7 +1,7 @@
 const { ValidationError } = require("../Errors");
 
 function validateCreateUser(req, res, next) {
-  if (!req.body.firstName || !req.body.email || !req.body.password) {
+  if (!req.body.firstName || !req.body.email) {
     return next(new ValidationError("Missing required feilds"));
   }
   next();

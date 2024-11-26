@@ -32,6 +32,15 @@ class CrudRepository {
     }
   }
 
+  async findAll() {
+    try {
+      const response = await this.model.find({});
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async delete(id) {
     try {
       await this.model.findByIdAndDelete(id);

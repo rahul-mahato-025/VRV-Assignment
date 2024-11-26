@@ -1,3 +1,4 @@
+const { UserDto } = require("../dtos");
 const { DuplicateError, NotExistError } = require("../Errors");
 const { UserRepository } = require("../Repositories");
 
@@ -12,7 +13,7 @@ class UserService {
       if (userExists) throw new DuplicateError("email", dataObj.email);
 
       const response = await this.userRepository.create(dataObj);
-      return response;
+      return new UserDto(response);
     } catch (error) {
       throw error;
     }
@@ -24,7 +25,7 @@ class UserService {
       if (!userExists) throw new NotExistError("userId", id);
 
       const response = await this.userRepository.update(id, dataObj);
-      return response;
+      return new UserDto(response);
     } catch (error) {
       throw error;
     }
@@ -33,7 +34,16 @@ class UserService {
   async findById(id) {
     try {
       const response = await this.userRepository.findById(id);
-      return response;
+      return new UserDto(response);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findAll() {
+    try {
+      const response = await this.userRepository.findAll();
+      return response.map((user) => new UserDto(user));
     } catch (error) {
       throw error;
     }

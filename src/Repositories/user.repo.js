@@ -14,6 +14,15 @@ class UserRepository extends CrudRepository {
       throw error;
     }
   }
+
+  async findAll() {
+    try {
+      const response = await this.model.find({}).populate("roles");
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = UserRepository;

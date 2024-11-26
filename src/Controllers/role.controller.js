@@ -7,8 +7,10 @@ async function create(req, res, next) {
   try {
     const dataObj = {
       roleName: req.body.roleName,
-      permissions: req.body.permission ? req.body.permissions : [],
+      permissions: req.body.permissions ? req.body.permissions : [],
     };
+    console.log(req.body);
+
     const response = await roleService.create(dataObj);
     return res.status(StatusCodes.CREATED).json({
       success: true,
@@ -26,7 +28,7 @@ async function update(req, res, next) {
     const roleId = req.params.roleId;
     const dataObj = {
       roleName: req.body.roleName,
-      permissions: req.body.permission ? req.body.permission : [],
+      permissions: req.body.permissions ? req.body.permissions : [],
     };
     const response = await roleService.update(roleId, dataObj);
     return res.status(StatusCodes.OK).json({
@@ -54,6 +56,21 @@ async function findById(req, res, next) {
   }
 }
 
+async function findAll(req, res, next) {
+  try {
+    const response = await roleService.findAll();
+
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      data: response,
+      err: {},
+      message: "Roles fetched Successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 async function destroy(req, res, next) {
   try {
     await roleService.delete(req.params.roleId);
@@ -64,6 +81,7 @@ async function destroy(req, res, next) {
       message: "Role deleted Successfully",
     });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 }
@@ -72,5 +90,6 @@ module.exports = {
   create,
   update,
   findById,
+  findAll,
   destroy,
 };
