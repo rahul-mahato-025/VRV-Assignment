@@ -9,7 +9,6 @@ async function create(req, res, next) {
       roleName: req.body.roleName,
       permissions: req.body.permissions ? req.body.permissions : [],
     };
-    console.log(req.body);
 
     const response = await roleService.create(dataObj);
     return res.status(StatusCodes.CREATED).json({

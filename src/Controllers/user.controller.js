@@ -9,7 +9,6 @@ async function create(req, res, next) {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
-      // password: req.body.password,
       roles: req.body.roles ? req.body.roles : [],
       status: req.body.status ? req.body.status : "active",
       isAdmin: req.body.isAdmin ? req.body.isAdmin : false,
