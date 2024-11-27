@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET, JWT_EXPIRY } = require("../Config/server.config");
+const { JWT_SECRET, JWT_EXPIRY } = require("../configs/server.config");
 
 class JWtService {
   async generateToken(payload) {
